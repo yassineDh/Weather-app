@@ -23,10 +23,7 @@ async function myFunction() {
   cityLoading.style.display = "none";
 
   if (cityWeather.cod == 404) {
-
-    console.log("in");
     displayWeatherError();
-    console.log("out");
     return;
   } else {
     displayWeatherInfo(cityWeather);
@@ -98,7 +95,7 @@ function displayWeatherInfo(obj) {
 }
 
 function displayWeatherError() {
-  document.body.style.backgroundImage = 'none';
+  document.body.style.backgroundImage = "none";
   let errorMessage = document.createElement("p");
   errorMessage.innerText = "City not found , please verify the input.";
   cityInfo.appendChild(errorMessage);
