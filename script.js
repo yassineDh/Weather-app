@@ -11,16 +11,22 @@ const API_KEY_GYPHY = "lM9rDakqzv4UO9MgYDtPgiGqb17iDhGM";
 
 let inp = document.getElementById("cityInput");
 let cityInfo = document.getElementById("infos");
+let cityLoading = document.getElementById("loader");
 
 async function myFunction() {
-  let cityWeather = await getCityWeather(inp.value);
-  inp.value = "";
   if (cityInfo.hasChildNodes()) {
     cityInfo.removeChild(cityInfo.childNodes[0]);
   }
+  cityLoading.style.display = "block";
+  let cityWeather = await getCityWeather(inp.value);
+  inp.value = "";
+  cityLoading.style.display = "none";
 
   if (cityWeather.cod == 404) {
+
+    console.log("in");
     displayWeatherError();
+    console.log("out");
     return;
   } else {
     displayWeatherInfo(cityWeather);
@@ -92,6 +98,8 @@ function displayWeatherInfo(obj) {
 }
 
 function displayWeatherError() {
+  document.body.style.backgroundImage = 'none';
   let errorMessage = document.createElement("p");
   errorMessage.innerText = "City not found , please verify the input.";
+  cityInfo.appendChild(errorMessage);
 }
