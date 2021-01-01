@@ -1,4 +1,4 @@
-body{
+/* body{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -22,4 +22,9 @@ body{
     display: flex;
     flex-direction: column;
     text-align:center;
+} */
+
+#map {
+  height: 100vh;
+  width: 100%;
 }
