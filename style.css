@@ -1,3 +1,10 @@
+body{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
 .container{
     width: 500px;
     height: 300px;

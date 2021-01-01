@@ -20,12 +20,11 @@ async function myFunction() {
   }
 
   if (cityWeather.cod == 404) {
-    console.log("33333");
     displayWeatherError();
     return;
   } else {
     displayWeatherInfo(cityWeather);
-    getGiphyWeather(cityWeather.weather[0].main);
+    getGiphyWeather(cityWeather.weather[0].description);
   }
 }
 
@@ -41,8 +40,6 @@ async function getCityWeather(city) {
       API_UNIT_WEATHER,
     { mode: "cors" }
   );
-  // .then((res) => res.json())
-  // .then((res) => console.log(res));
 
   let resJs = await objWeather.json();
 
@@ -54,18 +51,12 @@ async function getGiphyWeather(env) {
     "https://" + API_URL_GIPHY + "?q=" + env + "&api_key=" + API_KEY_GYPHY,
     { mode: "cors" }
   );
-  // .then((res) => res.json())
-  // .then((res) => console.log(res));
 
   let resJs = await objGiphy.json();
-//   let resURL = await resJs.data[0].images.hd.mp4;
-//   console.log(resURL);
-  document.body.style.backgroundImage = "url('https://media2.giphy.com/media/3oEdvbelTmMXOQ9VDO/giphy-hd.mp4?cid=666f6bd96u5j3ydy59y62u722pkh1md36kniw4nlq100nq55&rid=giphy-hd.mp4')";
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundRepeat = "repeat";
+  let resURL = await resJs.data[0].images.original.url;
+  document.body.style.backgroundImage = `url(${resURL})`;
 
-  
-//   return resURL;
+  //   return resURL;
 }
 
 function displayWeatherInfo(obj) {
@@ -101,10 +92,6 @@ function displayWeatherInfo(obj) {
 }
 
 function displayWeatherError() {
-  console.log("111111");
   let errorMessage = document.createElement("p");
   errorMessage.innerText = "City not found , please verify the input.";
-  cityInfo.appendChild(errorMessage);
-
-  console.log("2222222");
 }
